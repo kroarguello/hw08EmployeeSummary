@@ -9,89 +9,130 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const { listenerCount } = require("process");
 
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 const role = ["Manager",
-"Engineer",
-"Intern"
+  "Engineer",
+  "Intern"
 ];
+//Asking if is a Manager 
+function manager() {
+  inquirer
+    .prompt(
 
+      {
+        type: "list",
+        message: "Are you a Manager ?",
+        name: "value",
+        choices: ["yes", "no"]
+
+      })
+    .then(answer => {
+      
+      if (answer.value == "yes") {
+        console.log("Please start adding yourself and your  team");
+        questionEmployee();
+      }
+      else {
+        console.log("You need to be a manager for adding employees");
+      }
+    });
+
+}
+
+//making general questions
 function questionEmployee() {
 
-  return inquirer.prompt([
-    {
-      type: "input",
-      message: "What is the name?",
-      name: "name"
-    },
-    {
-      type: "input",
-      message: "What is your Id",
-      name: "userId"
-    },
-    {
-      type: "input",
-      message: "What is your email",
-      name: "email"
-    },
-    {
-      type: "list",
-      message: "What is your title?",
-      name: "role",
-      choices: [
-        typeUser[0],
-        typeUser[1],
-        typeUser[2],
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the name?",
+        name: "name"
+      },
+      {
+        type: "input",
+        message: "What is your Id",
+        name: "userId"
+      },
+      {
+        type: "input",
+        message: "What is your email",
+        name: "email"
+      },
+      {
+        type: "list",
+        message: "What is your title?",
+        name: "role",
+        choices: [
+          role[0],
+          role[1],
+          role[2]
         ]
+      }
 
-    }
-    
-  ]);
-  
+    ])
+
+    .then(answer => {
+      //Get the role depending what was choose
+      if (answer.role == "Manager") {
+        inquirer.prompt([
+          {
+            type: "input",
+            message: "What is your Office Phone number?",
+            name: "phonenumber"
+          }]);
+      }
+      else if (answer.role == "Engineer") {
+        inquirer.prompt([
+          {
+            type: "input",
+            message: "What is your Github user?",
+            name: "github"
+          }]);
+      }
+      else {
+        inquirer.prompt([
+          {
+            type: "input",
+            message: "What is your School?",
+            name: "school"
+          }]);
+      }
+
+
+    });
+
 }
-//askQuestion();
 
 
-function questionManager() {
-
-  return inquirer.prompt([
-    {
-      type: "input",
-      message: "What is your Office Phone number?",
-      name: "phonenumber"
-    }
-
-  ]);
-
-  function questionEngineer() {
-
-    return inquirer.prompt([
-      {
-        type: "input",
-        message: "What is your Github user?",
-        name: "github"
+function moreEmployee() {
+  inquirer
+    .prompt([{
+      type: "list",
+      message: "Would you like add one more Team",
+      name: "moreTeam",
+      choices: ["Yes", "No"]
+    }])
+    .then(answer => {
+      if (answer.moreTeam == "Yes") {
+        console.log("mas team");
       }
-  
-    ]);
-  
-  function questionIntern() {
-
-    return inquirer.prompt([
-      {
-        type: "input",
-        message: "What is your School?",
-        name: "school"
+      else {
+        console.log("Thank you , here is you team");
       }
-  
-    ]);
+    })
+}
 
 
-  
+//Calling the questions
+manager();
 
-const question = new AskQuestion ();
+  //    const question = new AskQuestion();
 
 
 
