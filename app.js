@@ -13,17 +13,18 @@ const { listenerCount } = require("process");
 const { createReadStream } = require("fs");
 
 
+
 //Array 
 let employees = [];
 
 
-//Adding Manager
+///Adding Manager
 function addManager() {
   inquirer
     .prompt([
       {
         type: "input",
-        message: "What is your name?",
+        message: "What is the name?",
         name: "name"
       },
       {
@@ -49,14 +50,13 @@ function addManager() {
     });
 }
 
-
 //Adding Engineer
 function addEngineer() {
   inquirer
     .prompt([
       {
         type: "input",
-        message: "What is the Engineer name?",
+        message: "What is the name?",
         name: "name"
       },
       {
@@ -104,7 +104,7 @@ function addIntern() {
       },
       {
         type: "input",
-        message: "What is your school?",
+        message: "What is your school",
         name: "school"
       }
 
@@ -117,16 +117,12 @@ function addIntern() {
 
 
 
-
-
-//Creating html 
+//Creating html
 function createTeam() {
   fs.writeFileSync(outputPath, render(employees), "utf-8");
 }
 
-
-
-//Adding a Team Member
+//adding more team
 function addTeam() {
   inquirer.prompt([
     {
@@ -148,14 +144,11 @@ function addTeam() {
       addIntern();
     }
 
-    if (answer.role === "No Adding more team member") {
+    if (answer.role === "No team member anymore") {
       createTeam();
     }
   })
 }
-
-// }
-
 
 
 //Initialization of app - Calling the questions
