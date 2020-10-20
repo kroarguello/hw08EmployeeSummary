@@ -27,3 +27,5 @@ but it choose No more team, then a html will be generate with all the informatio
 ![Alt text](templates/pic4.png?raw=true)     
 
 ![Alt text](templates/pic5.png?raw=true)     
+
+![Alt text](templates/pic6.png?raw=true)  
