@@ -23,7 +23,7 @@ function addManager() {
     .prompt([
       {
         type: "input",
-        message: "What is the name?",
+        message: "What is your name?",
         name: "name"
       },
       {
@@ -56,7 +56,7 @@ function addEngineer() {
     .prompt([
       {
         type: "input",
-        message: "What is the name?",
+        message: "What is the Engineer name?",
         name: "name"
       },
       {
@@ -89,7 +89,7 @@ function addIntern() {
     .prompt([
       {
         type: "input",
-        message: "What is the name?",
+        message: "What is the Intern name?",
         name: "name"
       },
       {
@@ -148,7 +148,7 @@ function addTeam() {
       addIntern();
     }
 
-    if (answer.role === "No team member anymore") {
+    if (answer.role === "No Adding more team member") {
       createTeam();
     }
   })
