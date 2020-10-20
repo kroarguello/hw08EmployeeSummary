@@ -17,6 +17,14 @@ const { listenerCount } = require("process");
 //we safe all info of the employees
 let employees= [];
 
+let objEmployee = {
+  length: 0,
+  addElem: function addElem(elem){
+    [].push.call(this, elem)
+
+  }
+}
+
 const role = ["Manager",
   "Engineer",
   "Intern"
@@ -82,7 +90,7 @@ function questionEmployee() {
 
     .then(answer => {
       employees = [answer.name, answer.userId, answer.email, answer.role];
-      console.log(employees);
+      
       //Get the role depending what was choose
 
       let messageR="";
@@ -109,12 +117,18 @@ function questionEmployee() {
           choices: ["Yes", "No"] 
         }
       ])
-      .then(answer => {
+      .then(answer => { // adding more than one team
+        
         employees.push(answer.extraInfo);
-        console.log(employees);
+        
+        
+        objEmployee.addElem({employees});
+      //  console.log(objEmployee.length);
+        console.log(objEmployee);
+
         if (answer.moreTeam == "Yes") {
-          console.log("mas team");
-          questionEmployee();
+         //Adding more team       
+           questionEmployee();
        
   
         }
