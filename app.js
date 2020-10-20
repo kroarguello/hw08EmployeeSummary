@@ -134,7 +134,8 @@ function questionEmployee() {
           else {
             console.log("Thank you , here is you Team Members");
             console.log(objEmployee);
-            render();//Calling render function 
+            console.log(objEmployee.length);
+            //render();//Calling render function 
           }
         })
 
