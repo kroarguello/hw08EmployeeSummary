@@ -14,12 +14,13 @@ const { listenerCount } = require("process");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-//we safe all info of the employees
-let employees= [];
+
+//Aray and Object where is each team member
+let employees = [];
 
 let objEmployee = {
   length: 0,
-  addElem: function addElem(elem){
+  addElem: function addElem(elem) {
     [].push.call(this, elem)
 
   }
@@ -43,7 +44,7 @@ function manager() {
 
       })
     .then(answer => {
-      
+
       if (answer.value == "yes") {
         console.log("Please start adding yourself and your  team");
         questionEmployee();
@@ -55,7 +56,7 @@ function manager() {
 
 }
 
-//making general questions
+//Making general questions
 function questionEmployee() {
 
   inquirer
@@ -90,14 +91,14 @@ function questionEmployee() {
 
     .then(answer => {
       employees = [answer.name, answer.userId, answer.email, answer.role];
-      
+
       //Get the role depending what was choose
 
-      let messageR="";
-      if (answer.role == "Manager"){
+      let messageR = "";
+      if (answer.role == "Manager") {
         messageR = "What is your Office Phone number?";
       }
-      else if (answer.role == "Engineer"){
+      else if (answer.role == "Engineer") {
         messageR = "What is you Github user?";
       }
       else {
@@ -106,50 +107,47 @@ function questionEmployee() {
 
       inquirer.prompt([
         {
-        type:"input",
-        message : messageR,
-        name: "extraInfo" 
+          type: "input",
+          message: messageR,
+          name: "extraInfo"
         },
         {
           type: "list",
           message: "Would you like add one more Team",
           name: "moreTeam",
-          choices: ["Yes", "No"] 
+          choices: ["Yes", "No"]
         }
       ])
-      .then(answer => { // adding more than one team
-        
-        employees.push(answer.extraInfo);
-        
-        
-        objEmployee.addElem({employees});
-      //  console.log(objEmployee.length);
-        console.log(objEmployee);
+        .then(answer => { // adding more than one team
 
-        if (answer.moreTeam == "Yes") {
-         //Adding more team       
-           questionEmployee();
-       
-  
-        }
-        else {
-          console.log("Thank you , here is you Team Members");
-        }
-      })
+          employees.push(answer.extraInfo);
 
-        
-    
+
+          objEmployee.addElem({ employees });
+          //  console.log(objEmployee.length);
+          console.log(objEmployee);
+
+          if (answer.moreTeam == "Yes") {
+            //Adding more team       
+            questionEmployee();
+          }
+          else {
+            console.log("Thank you , here is you Team Members");
+          }
+        })
+
+
+
     })
-    
+
 
 }
 
 
 
-
-//Calling the questions
+//Initialization of app - Calling the questions
 manager();
-//moreEmployee();
+
 
 
 
