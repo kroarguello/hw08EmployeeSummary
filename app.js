@@ -125,7 +125,7 @@ function questionEmployee() {
 
           objEmployee.addElem({ employees });
           //  console.log(objEmployee.length);
-          console.log(objEmployee);
+         // console.log(objEmployee);
 
           if (answer.moreTeam == "Yes") {
             //Adding more team       
@@ -133,6 +133,8 @@ function questionEmployee() {
           }
           else {
             console.log("Thank you , here is you Team Members");
+            console.log(objEmployee);
+            render();//Calling render function 
           }
         })
 
