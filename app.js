@@ -14,11 +14,14 @@ const { listenerCount } = require("process");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+//we safe all info of the employees
+let employees= [];
 
 const role = ["Manager",
   "Engineer",
   "Intern"
 ];
+
 //Asking if is a Manager 
 function manager() {
   inquirer
@@ -78,61 +81,64 @@ function questionEmployee() {
     ])
 
     .then(answer => {
+      employees = [answer.name, answer.userId, answer.email, answer.role];
+      console.log(employees);
       //Get the role depending what was choose
-      if (answer.role == "Manager") {
-        inquirer.prompt([
-          {
-            type: "input",
-            message: "What is your Office Phone number?",
-            name: "phonenumber"
-          }]);
+
+      let messageR="";
+      if (answer.role == "Manager"){
+        messageR = "What is your Office Phone number?";
       }
-      else if (answer.role == "Engineer") {
-        inquirer.prompt([
-          {
-            type: "input",
-            message: "What is your Github user?",
-            name: "github"
-          }]);
+      else if (answer.role == "Engineer"){
+        messageR = "What is you Github user?";
       }
       else {
-        inquirer.prompt([
-          {
-            type: "input",
-            message: "What is your School?",
-            name: "school"
-          }]);
+        messageR = "What is your School";
       }
 
+      inquirer.prompt([
+        {
+        type:"input",
+        message : messageR,
+        name: "extraInfo" 
+        },
+        {
+          type: "list",
+          message: "Would you like add one more Team",
+          name: "moreTeam",
+          choices: ["Yes", "No"] 
+        }
+      ])
+      .then(answer => {
+        employees.push(answer.extraInfo);
+        console.log(employees);
+        if (answer.moreTeam == "Yes") {
+          console.log("mas team");
+          questionEmployee();
+       
+  
+        }
+        else {
+          console.log("Thank you , here is you Team Members");
+        }
+      })
 
-    });
-
-}
-
-
-function moreEmployee() {
-  inquirer
-    .prompt([{
-      type: "list",
-      message: "Would you like add one more Team",
-      name: "moreTeam",
-      choices: ["Yes", "No"]
-    }])
-    .then(answer => {
-      if (answer.moreTeam == "Yes") {
-        console.log("mas team");
-      }
-      else {
-        console.log("Thank you , here is you team");
-      }
+        
+    
     })
+    
+
 }
+
+
 
 
 //Calling the questions
 manager();
+//moreEmployee();
 
-  //    const question = new AskQuestion();
+
+
 
 
 
